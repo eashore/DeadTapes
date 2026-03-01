@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dead Tapes Downloads</title>
+  <meta
+    name="description"
+    content="Download the Dead Tapes app for macOS or Windows."
+  >
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Official download page</p>
+      <h1 id="app-name">Dead Tapes</h1>
+      <p class="summary" id="tagline">
+        Pick your platform and download the latest release.
+      </p>
+      <p class="version" id="version-label"></p>
+    </section>
+
+    <section class="downloads" aria-label="Download links">
+      <a class="card" id="mac-link" href="#" download>
+        <span class="platform">macOS</span>
+        <strong>Download for Mac</strong>
+        <span class="detail" id="mac-detail">Apple Silicon / Intel</span>
+      </a>
+
+      <a class="card" id="windows-link" href="#" download>
+        <span class="platform">Windows</span>
+        <strong>Download for Windows</strong>
+        <span class="detail" id="windows-detail">Windows 11, x64</span>
+      </a>
+    </section>
+
+    <p class="note" id="support-copy">
+      If your browser warns about downloads, confirm that you trust the file
+      source before opening it.
+    </p>
+  </main>
+
+  <script src="./site-config.js"></script>
+  <script>
+    const config = window.downloadSiteConfig;
+
+    const appName = document.getElementById("app-name");
+    const tagline = document.getElementById("tagline");
+    const versionLabel = document.getElementById("version-label");
+    const supportCopy = document.getElementById("support-copy");
+    const macLink = document.getElementById("mac-link");
+    const windowsLink = document.getElementById("windows-link");
+    const macDetail = document.getElementById("mac-detail");
+    const windowsDetail = document.getElementById("windows-detail");
+
+    appName.textContent = config.appName;
+    document.title = config.appName + " Downloads";
+    tagline.textContent = config.tagline;
+    versionLabel.textContent = config.version ? "Current release: " + config.version : "";
+    supportCopy.textContent = config.supportCopy;
+    macDetail.textContent = config.macLabel;
+    windowsDetail.textContent = config.windowsLabel;
+
+    function bindLink(element, href) {
+      if (!href) {
+        element.removeAttribute("href");
+        element.setAttribute("aria-disabled", "true");
+        element.classList.add("disabled");
+        return;
+      }
+
+      element.href = href;
+    }
+
+    bindLink(macLink, config.macUrl);
+    bindLink(windowsLink, config.windowsUrl);
+  </script>
+</body>
+</html>
